@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { fetchedApi } from "../fetchedApi/fetchedApi";
+import Banner from "./Banner";
 const Home = () => {
   const [data, setData] = useState([]);
-  useEffect(() => {
-    fetchData();
-  });
-  const fetchData = async () => {
-    try {
-      const data = await fetchedApi();
-      console.log("Fetched data:", data);
-    } catch (error) {
-      console.error("Error fetching data:", error.message);
-    }
-    console.log(data) 
-  };
-  return <div>Home</div>;
+
+  return (
+    <div className="px-24">
+      <Banner />
+      <div>home</div>
+    </div>
+  );
 };
 
 export default Home;

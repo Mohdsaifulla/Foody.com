@@ -3,7 +3,7 @@ import { navLinks } from "../constants/constants";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
-    <div className="flex justify-between h-20 shadow-xl px-5">
+    <div className="flex justify-between h-20 shadow-xl px-24">
       <div className="flex justify-center items-center">
         <Link to='/'>
         <img src="/swiggy-1.svg" alt="swiggy-logo" className="w-7" />
