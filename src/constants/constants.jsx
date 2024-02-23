@@ -10,3 +10,6 @@ export const navLinks = [
   { id: 4, name: "Sign In", icon: <CgProfile />, to: "/signin" },
   { id: 5, name: "Cart", icon: <LuShoppingCart />, to: "/cart" },
 ];
+
+
+export const CDN_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_288,h_360/"
