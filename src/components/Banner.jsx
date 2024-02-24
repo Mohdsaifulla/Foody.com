@@ -21,7 +21,7 @@ const Banner = () => {
           <img
             src={`${CDN_URL}${item.imageId}`}
             alt="Banner Image"
-            className="md:w-36 w-[144px]"
+            className="md:w-36 w-[144px] hover:scale-125 duration-300"
           />
         ))}
       </div>

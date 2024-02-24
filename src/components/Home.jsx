@@ -38,7 +38,7 @@ const Home = () => {
                 <img
                   src={`${CDN_URL}${item?.info?.cloudinaryImageId}`}
                   alt="Food"
-                  className="w-full h-40 rounded-2xl object-cover"
+                  className="w-full h-40 rounded-2xl object-cover hover:scale-90 duration-300"
                 />
 
                 <div className="flex flex-col gap-1">
