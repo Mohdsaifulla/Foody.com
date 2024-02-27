@@ -11,6 +11,8 @@ import Search from "./components/Search";
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Offers from "./components/Offers.jsx";
+import RestaurantsMenue from "./components/RestaurantsMenu.jsx";
+import RestaurantsMenu from "./components/RestaurantsMenu.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +43,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/restaurants/:restaurantId",
+        element: <RestaurantsMenu/>,
       },
     ],
     errorElement: <Error />,

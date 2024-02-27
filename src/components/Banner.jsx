@@ -18,7 +18,7 @@ const Banner = () => {
       </div>
       <div className="flex overflow-x-scroll pt-8">
         {bannerData?.imageGridCards?.info?.map((item) => (
-          <img
+          <img key={item?.id}
             src={`${CDN_URL}${item.imageId}`}
             alt="Banner Image"
             className="md:w-36 w-[144px] hover:scale-125 duration-300"
