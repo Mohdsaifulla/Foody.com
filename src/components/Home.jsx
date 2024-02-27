@@ -10,10 +10,6 @@ const Home = () => {
   const fetchData = async () => {
     const dataApi = await fetchedApi();
     setHeading(dataApi?.data?.cards[2]?.card?.card.title);
-    // console.log(
-    //   dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-    //     ?.restaurants
-    // );
     setData(
       dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
@@ -23,7 +19,7 @@ const Home = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  // console.log(data)  355000
+
   return (
     <>
       <div className="lg:px-32 px-10">
@@ -35,14 +31,17 @@ const Home = () => {
           {/* <div>Filter</div> */}
           <div className="flex flex-wrap justify-center items-center gap-6">
             {data.map((item) => (
-              <div key={item?.info?.id} className="pt-8 w-72 p-4 flex flex-col gap-4">
+              <div
+                key={item?.info?.id}
+                className="pt-8 w-72 p-4 flex flex-col gap-4"
+              >
                 <Link to={`/restaurants/${item.info.id}`}>
-                <img
-                  src={`${CDN_URL}${item?.info?.cloudinaryImageId}`}
-                  alt="Food"
-                  className="w-full h-40 rounded-2xl object-cover hover:scale-90 duration-300"
-                />
-</Link>
+                  <img
+                    src={`${CDN_URL}${item?.info?.cloudinaryImageId}`}
+                    alt="Food"
+                    className="w-full h-40 rounded-2xl object-cover hover:scale-90 duration-300"
+                  />
+                </Link>
                 <div className="flex flex-col gap-1">
                   <h2 className="font-semibold">{item?.info?.name}</h2>
                   <h2 className="font-semibold flex gap-1 items-center">

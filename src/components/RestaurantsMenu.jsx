@@ -14,9 +14,6 @@ console.log(restaurantId)
     console.log(jsonData?.data);
     setMenu(jsonData?.data.cards[0].card.card.text)
   };
-
-// &catalog_qa=undefined&submitAction=ENTER
-
   useEffect(() => {
 fetchRestMenu()
   }, []);

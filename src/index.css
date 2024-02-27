@@ -2,15 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-::-webkit-scrollbar {
+/* #overflow::-webkit-scrollbar {
     width: 0px;
   }
-  ::-webkit-scrollbar-track {
+  #overflow::-webkit-scrollbar-track {
     background: transparent;
   }
-  ::-webkit-scrollbar-thumb {
+  #overflow::-webkit-scrollbar-thumb {
     background: transparent;
   }
-  ::-webkit-scrollbar-thumb:hover {
+  #overflow::-webkit-scrollbar-thumb:hover {
     background: transparent;
+  } */
+
+  #overflow::-webkit-scrollbar {
+    display: none;
   }
