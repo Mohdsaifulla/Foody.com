@@ -4,9 +4,12 @@ import Banner from "./Banner";
 import { CDN_URL } from "../constants/constants";
 import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
+import Filtered from "./Filtered";
 const Home = () => {
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([]);
+
   const fetchData = async () => {
     const dataApi = await fetchedApi();
     setHeading(dataApi?.data?.cards[2]?.card?.card.title);
@@ -14,6 +17,8 @@ const Home = () => {
       dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
+    setFilteredRestaurant(dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+      ?.restaurants)
   };
 
   useEffect(() => {
@@ -28,9 +33,9 @@ const Home = () => {
           <div className="pt-8 font-bold text-2xl">
             <h1>{heading}</h1>
           </div>
-          {/* <div>Filter</div> */}
+          <Filtered data={data} setFilteredData={setFilteredRestaurant} />
           <div className="flex flex-wrap justify-center items-center gap-6">
-            {data.map((item) => (
+            {filteredRestaurant.map((item) => (
               <div
                 key={item?.info?.id}
                 className="pt-8 w-72 p-4 flex flex-col gap-4"
