@@ -3,11 +3,12 @@ import useRestaurantMenu from "../hooks/useRestaurantMenu";
 import Shimmer from "./Shimmer";
 import { FaStar } from "react-icons/fa";
 import RestaurantMenuList from "./RestaurantMenuList";
+import { useState } from "react";
 
 const RestaurantsMenu = () => {
   const { restaurantId } = useParams();
   const menu = useRestaurantMenu(restaurantId);
-
+const [showIndex,setShowIndex]=useState(0)
   if (menu === null) return <Shimmer />;
   const {
     name,
@@ -73,6 +74,8 @@ const RestaurantsMenu = () => {
           <RestaurantMenuList
           key={listItem?.card?.card?.title}
           data={listItem?.card?.card}
+          showIndex={index===showIndex?true:false}
+          setShowIndex={()=>setShowIndex(index)}
           />
         )}    
       </div>
