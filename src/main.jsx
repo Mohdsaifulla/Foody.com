@@ -13,16 +13,16 @@ import Error from "./components/Error";
 import Offers from "./components/Offers.jsx";
 import RestaurantsMenue from "./components/RestaurantsMenu.jsx";
 import RestaurantsMenu from "./components/RestaurantsMenu.jsx";
-
+import { Provider } from "react-redux";
+import appStore from "./store/appStore.js";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children:[
+    children: [
       {
         path: "/",
         element: <Home />,
-      
       },
       {
         path: "/search",
@@ -46,18 +46,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/restaurants/:restaurantId",
-        element: <RestaurantsMenu/>,
+        element: <RestaurantsMenu />,
       },
     ],
     errorElement: <Error />,
   },
- 
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <Provider store={appStore}>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
+    </Provider>
   </React.StrictMode>
 );
