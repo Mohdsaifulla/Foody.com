@@ -6,7 +6,7 @@ import { CDN_URL } from "../constants/constants";
 import { BsStarFill } from "react-icons/bs";
 
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
-  console.log(data);
+  // console.log(data);
   const handleIndex = () => {
     setShowIndex();
   };

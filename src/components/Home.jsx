@@ -5,11 +5,12 @@ import { CDN_URL } from "../constants/constants";
 import { MdStars } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Filtered from "./Filtered";
+import Shimmer from "./Shimmer";
 const Home = () => {
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-
+  // if (data === '') return <Shimmer />;
   const fetchData = async () => {
     const dataApi = await fetchedApi();
     setHeading(dataApi?.data?.cards[2]?.card?.card.title);
@@ -17,8 +18,12 @@ const Home = () => {
       dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
-    setFilteredRestaurant(dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
-      ?.restaurants)
+    setFilteredRestaurant(
+      dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants
+    );
+
+    // console.log(dataApi?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants);
   };
 
   useEffect(() => {
