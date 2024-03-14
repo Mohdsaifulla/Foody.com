@@ -4,11 +4,17 @@ import { IoIosArrowUp } from "react-icons/io";
 import { PiSquareLogoFill } from "react-icons/pi";
 import { CDN_URL } from "../constants/constants";
 import { BsStarFill } from "react-icons/bs";
-
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cartSlice";
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
   // console.log(data);
+  const dispatchItem = useDispatch();
   const handleIndex = () => {
     setShowIndex();
+  };
+
+  const handleCartItem = function (item) {
+    dispatchItem(addItem(item));
   };
   return (
     <div>
@@ -37,15 +43,22 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                     <span className="flex">
                       {item?.card?.info?.isBestseller ? (
                         <span className="flex gap-2 items-center text-yellow-600 text-md">
-                          <span><BsStarFill /></span> <span>Bestseller</span>
+                          <span>
+                            <BsStarFill />
+                          </span>{" "}
+                          <span>Bestseller</span>
                         </span>
                       ) : (
                         ""
                       )}
                     </span>
                   </div>
-                  <span className="font-semibold pt-1">{item?.card?.info?.name}</span>
-                  <span className="font-semibold">₹{item?.card?.info?.price / 100}</span>
+                  <span className="font-semibold pt-1">
+                    {item?.card?.info?.name}
+                  </span>
+                  <span className="font-semibold">
+                    ₹{item?.card?.info?.price / 100}
+                  </span>
                   <span className="w-3/5 lg:w-full text-sm text-gray-500 pt-1">
                     {item?.card?.info?.description}
                   </span>
@@ -57,7 +70,10 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                     className="w-44 h-32 rounded-xl"
                   />
 
-                  <button className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1">
+                  <button
+                    className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1 cursor-pointer"
+                    onClick={() => handleCartItem(item)}
+                  >
                     ADD
                   </button>
                 </div>

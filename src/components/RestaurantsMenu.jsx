@@ -32,7 +32,7 @@ const RestaurantsMenu = () => {
     );
   menu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
   // console.log(listItem)
-  console.log(menu);
+  // console.log(menu);
   return (
     <div className="lg:px-32 px-10 pt-8">
       <div className="flex justify-between">
