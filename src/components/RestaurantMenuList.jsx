@@ -4,11 +4,14 @@ import { IoIosArrowUp } from "react-icons/io";
 import { PiSquareLogoFill } from "react-icons/pi";
 import { CDN_URL } from "../constants/constants";
 import { BsStarFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
-import { addItem } from "../store/cartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem ,increaseItem} from "../store/cartSlice";
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
   // console.log(data);
+  const increasedItem=useSelector((store)=>store.cart.item)
   const dispatchItem = useDispatch();
+  // console.log(increasedItem)
+
   const handleIndex = () => {
     setShowIndex();
   };
@@ -16,6 +19,17 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
   const handleCartItem = function (item) {
     dispatchItem(addItem(item));
   };
+  const handleIncrease = function (item) {
+    dispatchItem(increaseItem(item));
+  };
+  const cartItems = data.itemCards.map((item) => ({
+    ...item,
+    quantity: 1
+  }));
+  const increasedQuantity=increasedItem.map((item)=>{
+    return item.quantity
+  })
+  // console.log(cartItems)
   return (
     <div>
       <div>
@@ -32,7 +46,7 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
           </div>
         </div>
         {showIndex &&
-          data?.itemCards.map((item) => (
+        cartItems.map((item) => (
             <div key={item.card.info.id}>
               <div className="flex justify-between  items-center ">
                 <div className="flex flex-col w-1/2">
@@ -45,7 +59,7 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                         <span className="flex gap-2 items-center text-yellow-600 text-md">
                           <span>
                             <BsStarFill />
-                          </span>{" "}
+                          </span>
                           <span>Bestseller</span>
                         </span>
                       ) : (
@@ -69,13 +83,23 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                     alt="dish-img"
                     className="w-44 h-32 rounded-xl"
                   />
-
-                  <button
-                    className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1 cursor-pointer"
-                    onClick={() => handleCartItem(item)}
-                  >
-                    ADD
-                  </button>
+                  <div className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1 cursor-pointer flex justify-around gap-2">
+                    <button className="font-bold text-xl">-</button>
+                    {increasedItem.length>0? <button
+                      className="rounded-lg font-semibold"
+                      onClick={() => handleCartItem(item)}
+                    >
+                      {increasedQuantity}
+                    </button>: <button
+                      className="rounded-lg font-semibold"
+                      onClick={() => handleCartItem(item)}
+                    >
+                      ADD
+                    </button>}
+                   
+                   
+                    <button className="font-bold" onClick={()=>handleIncrease(item)}>+</button>
+                  </div>
                 </div>
               </div>
               <div className="h-[2px] bg-gray-300 w-full mt-8">
