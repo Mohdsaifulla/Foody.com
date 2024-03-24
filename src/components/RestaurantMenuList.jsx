@@ -5,12 +5,12 @@ import { PiSquareLogoFill } from "react-icons/pi";
 import { CDN_URL } from "../constants/constants";
 import { BsStarFill } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem ,increaseItem} from "../store/cartSlice";
+import { addItem, decreaseItem, increaseItem } from "../store/cartSlice";
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
   // console.log(data);
-  const increasedItem=useSelector((store)=>store.cart.item)
+  const increasedItem = useSelector((store) => store.cart.item);
   const dispatchItem = useDispatch();
-  // console.log(increasedItem)
+  console.log(increasedItem);
 
   const handleIndex = () => {
     setShowIndex();
@@ -22,13 +22,17 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
   const handleIncrease = function (item) {
     dispatchItem(increaseItem(item));
   };
+  const handleDecrease = function (item) {
+    dispatchItem(decreaseItem(item));
+  };
   const cartItems = data.itemCards.map((item) => ({
     ...item,
-    quantity: 1
+    quantity: 1,
   }));
-  const increasedQuantity=increasedItem.map((item)=>{
-    return item.quantity
-  })
+  // const increasedQuantity = increasedItem.map((item) => {
+  //   return item.card.info.id
+  // });
+  // console.log(increasedQuantity)
   // console.log(cartItems)
   return (
     <div>
@@ -46,7 +50,7 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
           </div>
         </div>
         {showIndex &&
-        cartItems.map((item) => (
+          cartItems.map((item) => (
             <div key={item.card.info.id}>
               <div className="flex justify-between  items-center ">
                 <div className="flex flex-col w-1/2">
@@ -84,21 +88,42 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                     className="w-44 h-32 rounded-xl"
                   />
                   <div className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1 cursor-pointer flex justify-around gap-2">
-                    <button className="font-bold text-xl">-</button>
-                    {increasedItem.length>0? <button
-                      className="rounded-lg font-semibold"
-                      onClick={() => handleCartItem(item)}
-                    >
-                      {increasedQuantity}
-                    </button>: <button
-                      className="rounded-lg font-semibold"
-                      onClick={() => handleCartItem(item)}
-                    >
-                      ADD
-                    </button>}
-                   
-                   
-                    <button className="font-bold" onClick={()=>handleIncrease(item)}>+</button>
+                    {increasedItem.length > 0 ? (
+                      <div className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600 absolute bottom-1 cursor-pointer flex justify-around gap-2">
+                        <button
+                          className="rounded-lg font-semibold"
+                          onClick={() => handleDecrease(item)}
+                        >
+                          -
+                        </button>
+                        <button className="rounded-lg font-semibold">
+                          {increasedItem.find(
+                            (cartItem) =>
+                              cartItem.card.info.id === item.card.info.id
+                          )?.quantity || (
+                            <button
+                              className="rounded-lg font-semibold"
+                              onClick={() => handleCartItem(item)}
+                            >
+                              ADD
+                            </button>
+                          )}
+                        </button>
+                        <button
+                          className="rounded-lg font-semibold"
+                          onClick={() => handleIncrease(item)}
+                        >
+                          +
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="rounded-lg font-semibold"
+                        onClick={() => handleCartItem(item)}
+                      >
+                        ADD
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
