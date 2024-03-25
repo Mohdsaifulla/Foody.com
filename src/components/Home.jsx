@@ -15,11 +15,11 @@ const Home = () => {
     const dataApi = await fetchedApi();
     setHeading(dataApi?.data?.cards[2]?.card?.card.title);
     setData(
-      dataApi?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
     setFilteredRestaurant(
-      dataApi?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+      dataApi?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants
     );
 
