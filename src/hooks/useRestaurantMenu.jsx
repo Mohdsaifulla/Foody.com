@@ -12,10 +12,12 @@ const useRestaurantMenu = (restaurantId) => {
     );
     const jsonData = await data.json();
     setMenu(jsonData?.data);
-    // console.log(jsonData?.data);
+    console.log(jsonData?.data);
 
   };
   return menu
 };
 
 export default useRestaurantMenu;
+
+// https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.5355161&lng=77.3910265&restaurantId=822683&catalog_qa=undefined&submitAction=ENTER

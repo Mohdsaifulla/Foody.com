@@ -20,12 +20,13 @@ const RestaurantsMenu = () => {
     sla,
     costForTwoMessage,
     slugString,
- 
-  } = menu?.cards[0]?.card?.card?.info;
-  // console.log(name, cuisines, areaName, avgRating, totalRatingsString);
+  } = menu?.cards[2]?.card?.card?.info;
+  // console.log(name, cuisines, areaName, avgRating, totalRatingsString); chnanges card[0] and listitemcard[2]
+
+// console.log(menu)
 
   const listItem =
-    menu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    menu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (item) =>
         item.card?.["card"]?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
@@ -88,15 +89,21 @@ const RestaurantsMenu = () => {
       </div>
       <div className="pt-8 bg-gray-100 p-2 h-72">
         <div className="flex gap-2 items-center">
-          <span className="font-bold text-gray-400 font-serif text-3xl">Fssai</span>
-          <span className="text-sm text-gray-400">Licence NO.22773402333000034</span>
+          <span className="font-bold text-gray-400 font-serif text-3xl">
+            Fssai
+          </span>
+          <span className="text-sm text-gray-400">
+            Licence NO.22773402333000034
+          </span>
         </div>
         <hr></hr>
         <div className="text-gray-400 pt-8 p-1">
           <p className="font-bold">{name}</p>
           <p>(Outlet: {areaName})</p>
           <div className="flex gap-2 items-center pt-2 text-sm">
-            <span><IoLocation /></span>
+            <span>
+              <IoLocation />
+            </span>
             <p>{slugString}</p>
           </div>
         </div>

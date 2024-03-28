@@ -19,7 +19,7 @@ const AddToCartButton = ({ item }) => {
       {increasedItem.length > 0 ? (
         <div className="shadow-xl p-2 w-20 rounded-lg bg-white text-green-600  bottom-1 cursor-pointer flex justify-around gap-2">
           <button
-            className="rounded-lg font-semibold"
+            className="rounded-lg font-semibold hover:text-green-400"
             onClick={() => handleDecrease(item)}
           >
             -
@@ -37,7 +37,7 @@ const AddToCartButton = ({ item }) => {
             )}
           </button>
           <button
-            className="rounded-lg font-semibold"
+            className="rounded-lg font-semibold hover:text-green-400"
             onClick={() => handleIncrease(item)}
           >
             +
@@ -45,7 +45,7 @@ const AddToCartButton = ({ item }) => {
         </div>
       ) : (
         <button
-          className="rounded-lg font-semibold"
+          className="rounded-lg font-semibold  bg-white text-green-600 p-2 hover:text-green-400"
           onClick={() => handleCartItem(item)}
         >
           ADD
