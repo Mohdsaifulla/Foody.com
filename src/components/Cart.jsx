@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { CDN_URL } from "../constants/constants";
 import AddToCartButton from "./AddToCartButton";
+import BillDetails from "./BillDetails";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.item);
-  console.log(cartItems);
+  // console.log(cartItems);
   const [ammount, setamount] = useState(0);
   useEffect(() => {
     let amt = 0;
     cartItems.map(
       (item) => (amt += item.quantity * (item.card.info.price / 100))
     );
+    setamount(amt);
   }, [cartItems]);
+  // console.log(ammount)
   return (
-    <div className="flex gap-10 justify-between lg:px-32 px-10 pt-8">
+    <div className="flex flex-col md:flex-row  gap-10 justify-between lg:px-32 px-10 pt-8 ">
       <div className="border-2 w-[60%]">
         <div>
           <div>logo</div>
@@ -34,18 +37,18 @@ const Cart = () => {
       <div className="border-2  h-[50%] overflow-y-scroll">
         {cartItems.map((item) => (
           <div key={item.card.info.id} className="p-2">
-            <div className="flex gap-6 justify-start items-center">
+            <div className="flex gap-6 justify-center items-center">
               <img
                 src={`${CDN_URL}${item?.card?.info?.imageId}`}
                 className="w-14  h-14"
               />
               <p className="text-sm font-semibold text-gray-500">
-                {item.card.info.name}
+                {item.card.info.name.slice(0, 9)}...
               </p>
               <div className="">
                 <AddToCartButton item={item} />
               </div>
-              <div>
+              <div className="">
                 <p>₹{item.quantity * (item.card.info.price / 100)}</p>
               </div>
             </div>
@@ -58,19 +61,8 @@ const Cart = () => {
             Any suggestion? We will pass it on...
           </p>
         </div>
-
         <div>
-          {cartItems.map((item) => (
-            <div>
-              <div>
-                <p>Bill Details</p>
-              </div>
-              <div>
-                <p>Item Total</p>
-                <p>₹</p>
-              </div>
-            </div>
-          ))}
+          <BillDetails ammount={ammount} />
         </div>
       </div>
     </div>
