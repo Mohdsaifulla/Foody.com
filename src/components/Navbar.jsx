@@ -1,11 +1,43 @@
-import React from "react";
-import { navLinks } from "../constants/constants";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { addUserInfo, removeUser } from "../store/userInfoSlice";
+import { auth } from "../fireBase/firebase";
+import { IoIosSearch } from "react-icons/io";
+import { CgProfile } from "react-icons/cg";
+import { LuShoppingCart } from "react-icons/lu";
+import { IoIosLogOut } from "react-icons/io";
 const Navbar = () => {
+  const navigate = useNavigate();
   const cartItem = useSelector((store) => store.cart.item);
-  // console.log(cartItem);
-
+  const loggedIn = useSelector((store) => store.user);
+  // console.log(loggedIn);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const unsubscibe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName } = user;
+        dispatch(
+          addUserInfo({ uid: uid, email: email, displayName: displayName })
+        );
+        navigate("/");
+      } else {
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+    return () => unsubscibe();
+  }, []);
+  const handleSignOut = () => {
+    const auth = getAuth();
+    dispatch(removeUser());
+    signOut(auth)
+      .then(() => {})
+      .catch((error) => {
+        navigate("/ErrorPage");
+      });
+  };
   return (
     <div className="flex justify-between h-20 shadow-xl lg:px-32 sm:px-10 sticky top-0 backdrop-blur-3xl z-10">
       <div className="flex justify-center items-center">
@@ -14,18 +46,46 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="flex justify-center items-center gap-10 relative">
-        {navLinks.map((item) => (
-          <ul key={item.id}>
-            <Link to={item.to}>
-              <li className="flex justify-center items-center gap-2 cursor-pointer font-semibold text-lg hover:text-orange-500 duration-300">
-                <span>{item.icon}</span>
-                {item.name}
+        <ul className="flex gap-6">
+          <Link to={"/search"}>
+            <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
+              <span>
+                <IoIosSearch className="text-xl font-bold" />
+              </span>
+              <span>Search</span>
+            </li>
+          </Link>
+          {loggedIn ? (
+            <button to={"#"} onClick={handleSignOut}>
+              <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
+                <span>
+                  <IoIosLogOut className="text-xl font-bold" />
+                </span>
+                <span>{loggedIn.email.replace(/\d.*/, "").trim()}</span>
+              </li>
+            </button>
+          ) : (
+            <Link to={"/signin"}>
+              <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
+                <span>
+                  <CgProfile className="text-xl font-bold" />
+                </span>
+                <span>Sign In</span>
               </li>
             </Link>
-          </ul>
-        ))}
-        <div className="absolute top-[18px] right-[49px] text-sm font-semibold">
-          {cartItem.length}
+          )}
+
+          <Link to={"/cart"}>
+            <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
+              <span>
+                <LuShoppingCart className="text-xl font-bold" />
+              </span>
+              <span>Cart</span>
+            </li>
+          </Link>
+        </ul>
+        <div className="absolute top-[18px] right-[45px] text-sm font-semibold">
+          {cartItem?.length}
         </div>
       </div>
     </div>

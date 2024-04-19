@@ -39,13 +39,13 @@ const SignIn = () => {
           })
             .then(() => {
               const { uid, email, displayName } = auth.currentUser;
-              dispatch(
-                addUserInfo({
-                  uid: uid,
-                  email: email,
-                  displayName: displayName,
-                })
-              );
+              // dispatch(
+              //   addUserInfo({
+              //     uid: uid,
+              //     email: email,
+              //     displayName: displayName,
+              //   })
+              // );
             })
             .catch((error) => {
               setErrorMessage(error.message);

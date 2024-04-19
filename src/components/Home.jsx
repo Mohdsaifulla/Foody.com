@@ -10,7 +10,7 @@ const Home = () => {
   const [data, setData] = useState([]);
   const [heading, setHeading] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([]);
-  // if (data === '') return <Shimmer />;
+  // if (data) return <Shimmer />;
   const fetchData = async () => {
     const dataApi = await fetchedApi();
     setHeading(dataApi?.data?.cards[2]?.card?.card.title);
@@ -23,15 +23,16 @@ const Home = () => {
         ?.restaurants
     );
 
-    // console.log(dataApi?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants);
+    console.log(dataApi?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
-
+ 
   return (
     <>
+    
       <div className="lg:px-32 px-10">
         <Banner />
         <div className="">

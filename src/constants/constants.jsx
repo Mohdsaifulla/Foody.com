@@ -3,6 +3,7 @@ import { BiSolidOffer } from "react-icons/bi";
 import { IoHelpBuoy } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { LuShoppingCart } from "react-icons/lu";
+
 export const navLinks = [
   { id: 1, name: "Search", icon: <IoIosSearch />, to: "/search" },
   { id: 2, name: "Offers", icon: <BiSolidOffer />, to: "/offers" },
