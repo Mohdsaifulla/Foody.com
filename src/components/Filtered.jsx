@@ -1,26 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
+import { useDispatch } from "react-redux";
 
 const Filtered = ({ data, setFilteredData }) => {
-  // const [deselect, setDeselect] = useState(false);
-
-  // console.log(data);
-  // const handleRatingFourPlus = () => {
-  //   if (deselect) {
-  //     setFilteredData(data);
-  //   } else {
-  //     const filterfour = data.filter((item) => item.info.avgRating > 4);
-  //     setFilteredData(filterfour);
-  //   }
-  //   setDeselect((prev) => !prev);
-  // };
-
-  // const handleFastDelivery = () => {
-  //   const sortDelivery = [...data].sort(
-  //     (a, b) => a.info.sla.deliveryTime - b.info.sla.deliveryTime
-  //   );
-  //   setFilteredData(sortDelivery)
-  // };
 
   const [activeFilters, setActiveFilters] = useState({
     ratingFourPlus: false,

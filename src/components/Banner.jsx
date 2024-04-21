@@ -12,8 +12,6 @@ const Banner = () => {
     fetchData();
   }, []);
 
-  //https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.46210&lng=78.57580&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null
-
   const containerRef = useRef(null);
 
   const handleScroll = (direction) => {
@@ -58,13 +56,13 @@ const Banner = () => {
             />
           ))}
           <button
-            className="absolute -top-3 right-0 bg-gray-300 w-10 h-10 rounded-full"
+            className="absolute -top-3 right-0 bg-gray-300 w-10 h-10 rounded-full text-black"
             onClick={() => handleScroll("left")}
           >
             &gt;
           </button>
           <button
-            className="absolute -top-3 right-16 bg-gray-300 w-10 h-10 rounded-full"
+            className="absolute -top-3 right-16 bg-gray-300 w-10 h-10 rounded-full text-black"
             onClick={() => handleScroll("right")}
           >
             &lt;

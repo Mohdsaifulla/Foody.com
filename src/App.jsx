@@ -5,8 +5,9 @@ import { useSelector } from "react-redux";
 
 const App = () => {
   const selectTheme = useSelector((store) => store.theme.currentTheme);
+  document.documentElement.setAttribute("data-theme", selectTheme);
   return (
-    <div className="" data-theme={selectTheme}>
+    <div className="">
       <Navbar />
       <Outlet />
     </div>

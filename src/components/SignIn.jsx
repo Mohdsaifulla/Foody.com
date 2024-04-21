@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -7,13 +7,11 @@ import {
 } from "firebase/auth";
 import { auth } from "../fireBase/firebase";
 import { validation } from "../constants/validation";
-import { addUserInfo } from "../store/userInfoSlice";
+
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const dispatch = useDispatch();
-
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passRef = useRef(null);
@@ -21,7 +19,6 @@ const SignIn = () => {
     setIsSignIn(!isSignIn);
   };
   const handleSubmitDetails = () => {
-    // console.log({ nameRef, emailRef, passRef });
     const message = validation(emailRef.current.value, passRef.current.value);
     setErrorMessage(message);
     if (message) return;
@@ -39,13 +36,6 @@ const SignIn = () => {
           })
             .then(() => {
               const { uid, email, displayName } = auth.currentUser;
-              // dispatch(
-              //   addUserInfo({
-              //     uid: uid,
-              //     email: email,
-              //     displayName: displayName,
-              //   })
-              // );
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -74,13 +64,13 @@ const SignIn = () => {
   };
 
   return (
-    <div>
-      <div className="w-full relative  flex items-center justify-center  opacity-85">
+    <div className="">
+      <div className="w-full relative  flex items-center justify-center  ">
         <form
           onSubmit={(e) => e.preventDefault()}
           className="shadow-2xl border border-gray-400 flex flex-col sm:w-[400px] w-full gap-4 absolute top-2 rounded-lg mt-20"
         >
-          <label className="text-3xl font-semibold pt-6 mx-4">
+          <label className="text-3xl text-gray-400 font-semibold pt-6 mx-4">
             {isSignIn ? "Sign in" : "Sign Up"}
           </label>
           {!isSignIn && (
@@ -90,7 +80,7 @@ const SignIn = () => {
               id="name"
               name="name"
               placeholder="Name"
-              className="bg-transparent  border-gray-400 text-white border p-4 mx-4 rounded"
+              className="border-gray-400 text-gray-400 border p-4 mx-4 rounded"
             />
           )}
           <input
@@ -99,7 +89,7 @@ const SignIn = () => {
             id="email"
             name="email"
             placeholder="Email"
-            className="bg-transparent  border border-gray-400 p-4 mx-4 rounded"
+            className=" text-gray-400  border border-gray-400 p-4 mx-4 rounded"
           />
           <input
             type="password"
@@ -107,11 +97,11 @@ const SignIn = () => {
             id="password"
             name="password"
             placeholder="Password"
-            className="bg-transparent border p-4 mx-4 rounded border-gray-400"
+            className=" border p-4 mx-4 rounded border-gray-400 text-gray-400"
           />
           <p className="text-green-600 text-sm mx-4">{errorMessage}</p>
           <button
-            className="bg-green-600 rounded text-xl font-semibold p-2 mx-4 text-white hover:bg-green-700 opacity-100"
+            className="bg-green-600 rounded text-xl font-semibold p-2 mx-4 text-white hover:bg-green-700"
             onClick={handleSubmitDetails}
           >
             {isSignIn ? "Sign in" : "Sign Up"}

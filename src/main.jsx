@@ -11,7 +11,6 @@ import Search from "./components/Search";
 import Home from "./components/Home";
 import Error from "./components/Error";
 import Offers from "./components/Offers.jsx";
-import RestaurantsMenue from "./components/RestaurantsMenu.jsx";
 import RestaurantsMenu from "./components/RestaurantsMenu.jsx";
 import { Provider } from "react-redux";
 import appStore from "./store/appStore.js";
@@ -54,6 +53,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
+
   <React.StrictMode>
     <Provider store={appStore}>
       <RouterProvider router={router}>
