@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { clearCart, removeItem } from "../store/cartSlice";
 import Footer from "./Footer";
-
+import toast, { Toaster } from "react-hot-toast";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.item);
   const loggedIn = useSelector((store) => store.user);
@@ -25,6 +25,8 @@ const Cart = () => {
     );
     setamount(amt);
   }, [cartItems]);
+  const notifyDeleteOne = () => toast.success("One item has been removed");
+
   return (
     <>
       {cartItems.length > 0 ? (
@@ -57,7 +59,10 @@ const Cart = () => {
                   </div>
                   <button className="flex justify-center items-center hover:text-red-500 text-2xl cursor-pointer duration-300">
                     <MdDeleteForever
-                      onClick={() => dispatch(removeItem(item))}
+                      onClick={() => {
+                        dispatch(removeItem(item));
+                        notifyDeleteOne();
+                      }}
                     />
                   </button>
                 </div>
@@ -67,7 +72,9 @@ const Cart = () => {
             <div className="flex items-center justify-end px-4 pt-2 pb-2">
               <button
                 className="bg-red-700 hover:bg-red-500 duration-300 font-semibold p-1 rounded"
-                onClick={() => dispatch(clearCart())}
+                onClick={() => {
+                  dispatch(clearCart());
+                }}
               >
                 CLEAR CART
               </button>
@@ -121,6 +128,7 @@ const Cart = () => {
       <div className="px-16">
         <Footer />
       </div>
+      <Toaster />
     </>
   );
 };

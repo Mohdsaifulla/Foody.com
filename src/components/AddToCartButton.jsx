@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, decreaseItem, increaseItem } from "../store/cartSlice";
+import toast, { Toaster } from "react-hot-toast";
 const AddToCartButton = ({ item }) => {
   const dispatchItem = useDispatch();
   // console.log(item)
@@ -14,6 +15,8 @@ const AddToCartButton = ({ item }) => {
   const handleCartItem = function (item) {
     dispatchItem(addItem(item));
   };
+  const notify = () => toast.success("Item is Added to your cart.");
+
   return (
     <>
       {increasedItem.length > 0 ? (
@@ -32,7 +35,10 @@ const AddToCartButton = ({ item }) => {
             )?.quantity || (
               <button
                 className="rounded-lg font-semibold"
-                onClick={() => handleCartItem(item)}
+                onClick={() => {
+                  handleCartItem(item);
+                  notify();
+                }}
               >
                 ADD
               </button>
@@ -50,11 +56,15 @@ const AddToCartButton = ({ item }) => {
       ) : (
         <button
           className="rounded-lg font-semibold  bg-white text-green-600 p-2 hover:text-green-400"
-          onClick={() => handleCartItem(item)}
+          onClick={() => {
+            handleCartItem(item);
+            notify();
+          }}
         >
           ADD
         </button>
       )}
+      <Toaster />
     </>
   );
 };

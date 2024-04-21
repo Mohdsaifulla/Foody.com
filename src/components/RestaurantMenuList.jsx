@@ -4,13 +4,10 @@ import { IoIosArrowUp } from "react-icons/io";
 import { PiSquareLogoFill } from "react-icons/pi";
 import { CDN_URL } from "../constants/constants";
 import { BsStarFill } from "react-icons/bs";
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, decreaseItem, increaseItem } from "../store/cartSlice";
+
 import AddToCartButton from "./AddToCartButton";
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
-  // console.log(data);
-  const increasedItem = useSelector((store) => store.cart.item);
-  // console.log(increasedItem);
+
 
   const handleIndex = () => {
     setShowIndex();
@@ -20,11 +17,7 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
     ...item,
     quantity: 1,
   }));
-  // const increasedQuantity = increasedItem.map((item) => {
-  //   return item.card.info.id
-  // });
-  // console.log(increasedQuantity)
-  // console.log(cartItems)
+
   return (
     <div>
       <div>
