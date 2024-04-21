@@ -8,6 +8,7 @@ import { IoIosSearch } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoIosLogOut } from "react-icons/io";
+import ThemeController from "./ThemeController";
 const Navbar = () => {
   const navigate = useNavigate();
   const cartItem = useSelector((store) => store.cart.item);
@@ -47,6 +48,7 @@ const Navbar = () => {
       </div>
       <div className="flex justify-center items-center gap-10 relative">
         <ul className="flex gap-6">
+          <ThemeController />
           <Link to={"/search"}>
             <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
               <span>

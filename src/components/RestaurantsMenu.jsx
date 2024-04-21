@@ -63,19 +63,7 @@ const RestaurantsMenu = () => {
       <div className="h-[2px] bg-gray-300 w-full mt-8">
         <div></div>
       </div>
-      {/* <div>
-        <div>
-          <div>
-            <span>icon</span>
-            <span>{sla.lastMileTravelString}</span>
-          </div>
-          <div>
-            <span>icon</span>
-            <span>{costForTwoMessage}</span>
-          </div>
-        </div>
-        <div></div>
-      </div> */}
+   
 
       <div className="pb-8">
         {listItem.map((listItem, index) => (

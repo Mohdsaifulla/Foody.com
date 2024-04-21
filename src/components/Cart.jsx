@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../constants/constants";
 import AddToCartButton from "./AddToCartButton";
 import BillDetails from "./BillDetails";
 import { Link } from "react-router-dom";
 import Shimmer from "./Shimmer";
+import { MdDeleteForever } from "react-icons/md";
+import { clearCart, removeItem } from "../store/cartSlice";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.item);
-  // console.log(cartItems);
   const loggedIn = useSelector((store) => store.user);
   const [ammount, setamount] = useState(0);
+  const dispatch = useDispatch();
   useEffect(() => {
     let amt = 0;
     cartItems.map(
       (item) =>
         (amt +=
-          item.quantity *
-          (item.card.info.price
-            ? item.card.info.price / 100
-            : item.card.info.defaultPrice / 100))
+          item?.quantity *
+          (item?.card?.info?.price
+            ? item?.card?.info?.price / 100
+            : item?.card?.info?.defaultPrice / 100))
     );
     setamount(amt);
   }, [cartItems]);
@@ -31,16 +33,16 @@ const Cart = () => {
           <div className="text-2xl font-semibold text-green-500">
             <h1>SECURE CHECKOUT</h1>
           </div>
-          <div className="border border-dotted border-green-500 rounded h-[500px] overflow-y-scroll  w-full">
+          <div className="border border-dotted border-green-500 rounded h-[500px] overflow-y-scroll  w-full font-semibold">
             {cartItems.map((item) => (
-              <div key={item.card.info.id} className="p-2">
+              <div key={item?.card?.info?.id} className="p-2">
                 <div className="flex gap-6 justify-between items-center">
                   <img
                     src={`${CDN_URL}${item?.card?.info?.imageId}`}
                     className="w-32 rounded-lg"
                   />
                   <p className=" font-semibold text-gray-500">
-                    {item.card.info.name.slice(0, 20)}...
+                    {item?.card?.info?.name?.slice(0, 20)}...
                   </p>
                   <div className="">
                     <AddToCartButton item={item} />
@@ -49,15 +51,27 @@ const Cart = () => {
                     <p>
                       ₹
                       {item.quantity *
-                        (item.card.info.price
-                          ? item.card.info.price / 100
-                          : item.card.info.defaultPrice / 100)}
+                        (item?.card?.info?.price
+                          ? item?.card?.info?.price / 100
+                          : item?.card?.info?.defaultPrice / 100)}
                     </p>
                   </div>
+                  <button className="flex justify-center items-center hover:text-red-500 text-2xl cursor-pointer duration-300">
+                    <MdDeleteForever
+                      onClick={() => dispatch(removeItem(item))}
+                    />
+                  </button>
                 </div>
               </div>
             ))}
-
+            <div className="flex items-center justify-end px-4 pt-2 pb-2">
+              <button
+                className="bg-red-500 hover:bg-red-700 duration-300 font-semibold p-1 rounded"
+                onClick={() => dispatch(clearCart())}
+              >
+                CLEAR CART
+              </button>
+            </div>
             <div className=" p-2 flex justify-center items-center bg-gray-200 m-2 rounded">
               <span className="text-3xl font-bold">&#8220;</span>
               <p className="text-sm text-gray-500">
@@ -68,7 +82,7 @@ const Cart = () => {
               <BillDetails ammount={ammount} />
             </div>
           </div>
-          <div className="bg-gray-400 flex justify-between p-2 rounded">
+          <div className="bg-gray-200 flex justify-between p-2 rounded">
             <h1 className="text-xl font-semibold">Proceed To Payment</h1>
             <div className="flex flex-col">
               <button
@@ -78,11 +92,11 @@ const Cart = () => {
                     : "bg-orange-400 text-gray-700 font-bold px-1 rounded cursor-pointer hover:bg-green-500 duration-300"
                 }`}
               >
-                Pay Now
+                PAY NOW
               </button>
               {!loggedIn && (
-                <span className="text-sm text-gray-700">
-                  You are not Logged in
+                <span className="text-sm animate-bounce text-red-500 pt-1">
+                  YOU ARE NOT LOGGED IN
                 </span>
               )}
             </div>

@@ -23,7 +23,7 @@ const Home = () => {
         ?.restaurants
     );
 
-    console.log(dataApi?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants);
+    // console.log(dataApi?.data?.cards[4]?.card?.card.gridElements.infoWithStyle.restaurants);
   };
 
   useEffect(() => {

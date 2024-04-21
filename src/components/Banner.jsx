@@ -12,9 +12,7 @@ const Banner = () => {
     fetchData();
   }, []);
 
-  
-//https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.46210&lng=78.57580&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null
-
+  //https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.46210&lng=78.57580&collection=83644&tags=layout_CCS_Pizza&sortBy=&filters=&type=rcv2&offset=0&page_type=null
 
   const containerRef = useRef(null);
 
@@ -48,7 +46,7 @@ const Banner = () => {
       <div className="relative">
         <div
           id="overflow"
-          className="flex overflow-x-scroll pt-8 overflow-y-hidden"
+          className="flex h-42 overflow-x-scroll pt-8 overflow-y-hidden"
           ref={containerRef}
         >
           {bannerData?.imageGridCards?.info?.map((item) => (
@@ -56,17 +54,17 @@ const Banner = () => {
               key={item?.id}
               src={`${CDN_URL}${item.imageId}`}
               alt="Banner Image"
-              className="md:w-36 w-[144px] hover:scale-125 duration-300"
+              className="md:w-34 rounded-badge  border w-[144px] hover:scale-105 duration-300   mx-2"
             />
           ))}
           <button
-            className="absolute top-0 right-0 bg-gray-300 w-10 h-10 rounded-full"
+            className="absolute -top-3 right-0 bg-gray-300 w-10 h-10 rounded-full"
             onClick={() => handleScroll("left")}
           >
             &gt;
           </button>
           <button
-            className="absolute top-0 right-16 bg-gray-300 w-10 h-10 rounded-full"
+            className="absolute -top-3 right-16 bg-gray-300 w-10 h-10 rounded-full"
             onClick={() => handleScroll("right")}
           >
             &lt;

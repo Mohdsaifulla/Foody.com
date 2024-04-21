@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem, decreaseItem, increaseItem } from "../store/cartSlice";
 const AddToCartButton = ({ item }) => {
   const dispatchItem = useDispatch();
-
+  // console.log(item)
   const increasedItem = useSelector((store) => store.cart.item);
   const handleIncrease = function (item) {
     dispatchItem(increaseItem(item));
@@ -22,11 +22,13 @@ const AddToCartButton = ({ item }) => {
             className="rounded-lg font-semibold hover:text-green-400"
             onClick={() => handleDecrease(item)}
           >
-            -
+            {increasedItem.find(
+              (cartItem) => cartItem?.card?.info?.id === item?.card?.info?.id
+            )?.quantity && "-"}
           </button>
           <button className="rounded-lg font-semibold">
             {increasedItem.find(
-              (cartItem) => cartItem.card.info.id === item.card.info.id
+              (cartItem) => cartItem?.card?.info?.id === item?.card?.info?.id
             )?.quantity || (
               <button
                 className="rounded-lg font-semibold"
@@ -40,7 +42,9 @@ const AddToCartButton = ({ item }) => {
             className="rounded-lg font-semibold hover:text-green-400"
             onClick={() => handleIncrease(item)}
           >
-            +
+            {increasedItem.find(
+              (cartItem) => cartItem?.card?.info?.id === item?.card?.info?.id
+            )?.quantity && "+"}
           </button>
         </div>
       ) : (

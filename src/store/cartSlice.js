@@ -8,7 +8,7 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       const existingitem = state.item.find(
-        (item) => item.card.info.id === action.payload.card.info.id
+        (item) => item?.card?.info?.id === action?.payload?.card?.info?.id
       );
       if (existingitem) {
         existingitem.quantity += action.payload.quantity;
@@ -16,22 +16,28 @@ const cartSlice = createSlice({
         state.item.push(action.payload);
       }
     },
-    removeItem: (state) => {
-      state.item.pop;
+    removeItem: (state, action) => {
+      state.item = state.item.filter(
+        (item) => item.card.info.id !== action.payload.card.info.id
+      );
     },
     clearCart: (state) => {
       state.item.length = 0;
     },
     increaseItem: (state, action) => {
       const itemId = action.payload.card.info.id;
-      const foundItem = state.item.find((item) => item.card.info.id === itemId);
+      const foundItem = state.item.find(
+        (item) => item?.card?.info?.id === itemId
+      );
       if (foundItem) {
         foundItem.quantity += 1;
       }
     },
     decreaseItem: (state, action) => {
       const itemId = action.payload.card.info.id;
-      const foundItem = state.item.find((item) => item.card.info.id === itemId);
+      const foundItem = state.item.find(
+        (item) => item?.card?.info?.id === itemId
+      );
       if (foundItem) {
         if (foundItem.quantity === 1) {
           foundItem.quantity = 1;
