@@ -14,6 +14,7 @@ import Offers from "./components/Offers.jsx";
 import RestaurantsMenu from "./components/RestaurantsMenu.jsx";
 import { Provider } from "react-redux";
 import appStore from "./store/appStore.js";
+import SuccessfullOrder from "./components/SuccessfullOrder.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
+        path: "/successfull",
+        element: <SuccessfullOrder />,
+      },
+      {
         path: "/restaurants/:restaurantId",
         element: <RestaurantsMenu />,
       },
@@ -53,7 +58,6 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-
   <React.StrictMode>
     <Provider store={appStore}>
       <RouterProvider router={router}>

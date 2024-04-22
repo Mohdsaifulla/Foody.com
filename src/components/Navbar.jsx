@@ -9,11 +9,14 @@ import { CgProfile } from "react-icons/cg";
 import { LuShoppingCart } from "react-icons/lu";
 import { IoIosLogOut } from "react-icons/io";
 import ThemeController from "./ThemeController";
+import toast, { Toaster } from "react-hot-toast";
 const Navbar = () => {
   const navigate = useNavigate();
   const cartItem = useSelector((store) => store.cart.item);
   const loggedIn = useSelector((store) => store.user);
   // console.log(loggedIn);
+  const notifyLogout = () =>
+    toast.success("You have been logged out successfully");
   const dispatch = useDispatch();
   useEffect(() => {
     const unsubscibe = onAuthStateChanged(auth, (user) => {
@@ -59,7 +62,10 @@ const Navbar = () => {
           </Link>
           {loggedIn ? (
             <button to={"#"} onClick={handleSignOut}>
-              <li className="flex gap-2 items-center font-semibold hover:text-orange-500">
+              <li
+                className="flex gap-2 items-center font-semibold hover:text-orange-500"
+                onClick={() => notifyLogout()}
+              >
                 <span>
                   <IoIosLogOut className="text-xl font-bold" />
                 </span>
@@ -90,6 +96,7 @@ const Navbar = () => {
           {cartItem?.length}
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

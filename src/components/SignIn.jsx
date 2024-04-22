@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../fireBase/firebase";
 import { validation } from "../constants/validation";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const SignIn = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -15,6 +15,7 @@ const SignIn = () => {
   const nameRef = useRef(null);
   const emailRef = useRef(null);
   const passRef = useRef(null);
+  const notifySignIn = () => toast.success("You are now signed in");
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
   };
@@ -31,6 +32,7 @@ const SignIn = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          notifySignIn();
           updateProfile(user, {
             displayName: nameRef,
           })
@@ -54,6 +56,7 @@ const SignIn = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
+          notifySignIn();
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -119,6 +122,7 @@ const SignIn = () => {
           </div>
         </form>
       </div>
+      <Toaster />
     </div>
   );
 };

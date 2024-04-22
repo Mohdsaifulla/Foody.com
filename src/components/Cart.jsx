@@ -3,16 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../constants/constants";
 import AddToCartButton from "./AddToCartButton";
 import BillDetails from "./BillDetails";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdDeleteForever } from "react-icons/md";
 import { clearCart, removeItem } from "../store/cartSlice";
 import Footer from "./Footer";
 import toast, { Toaster } from "react-hot-toast";
+import StripeCheckout from "react-stripe-checkout";
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.item);
   const loggedIn = useSelector((store) => store.user);
   const [ammount, setamount] = useState(0);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   useEffect(() => {
     let amt = 0;
     cartItems.map(
@@ -26,6 +28,11 @@ const Cart = () => {
     setamount(amt);
   }, [cartItems]);
   const notifyDeleteOne = () => toast.success("One item has been removed");
+
+  const makePayment = (token) => {
+    dispatch(clearCart());
+    navigate("/successfull");
+  };
 
   return (
     <>
@@ -92,15 +99,24 @@ const Cart = () => {
           <div className="bg-gray-200 flex justify-between p-2 rounded">
             <h1 className="text-xl font-semibold">Proceed To Payment</h1>
             <div className="flex flex-col">
-              <button
-                className={`${
-                  !loggedIn
-                    ? "bg-green-500 text-white px-1 rounded cursor-not-allowed"
-                    : "bg-orange-400 text-gray-700 font-bold px-1 rounded cursor-pointer hover:bg-green-500 duration-300"
-                }`}
+              <StripeCheckout
+                token={makePayment}
+                stripeKey={import.meta.env.VITE_STRIPE_KEY}
+                ammount={ammount}
+                name="Food Order any time"
+                email="mfancisco@gmail.com"
+                description="payment test"
               >
-                PAY NOW
-              </button>
+                <button
+                  className={`${
+                    !loggedIn
+                      ? "bg-green-500 text-white px-2 py-1 rounded-xl cursor-not-allowed"
+                      : "bg-green-400 text-gray-700 font-bold px-2 py-1 rounded-xl  cursor-pointer hover:bg-green-500 duration-300"
+                  }`}
+                >
+                  PAY ₹{ammount}
+                </button>
+              </StripeCheckout>
               {!loggedIn && (
                 <span className="text-sm animate-bounce text-red-500 pt-1">
                   YOU ARE NOT LOGGED IN
