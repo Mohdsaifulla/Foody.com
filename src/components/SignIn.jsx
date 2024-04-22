@@ -110,9 +110,7 @@ const SignIn = () => {
             {isSignIn ? "Sign in" : "Sign Up"}
           </button>
           <div className="flex gap-2 p-2 mx-4">
-            <p className="">
-              {isSignIn ? "New to Swiggy" : "Already have account"}
-            </p>
+            <p className="">{isSignIn ? "New here" : "Already have account"}</p>
             <p
               className="font-semibold cursor-pointer hover:text-gray-400"
               onClick={toggleForm}

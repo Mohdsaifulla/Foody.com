@@ -38,7 +38,7 @@ const Banner = () => {
 
   return (
     <div>
-      <div className="pt-8 font-bold text-2xl">
+      <div className="pt-8 font-bold text-2xl pb-4">
         <h1>{bannerData?.header?.title}</h1>
       </div>
       <div className="relative">

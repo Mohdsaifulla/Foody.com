@@ -43,10 +43,14 @@ const Navbar = () => {
       });
   };
   return (
-    <div className="flex justify-between h-20 shadow-xl lg:px-32 sm:px-10 sticky top-0 backdrop-blur-3xl z-10">
+    <div className="flex justify-between h-20 shadow-xl lg:px-32 sm:px-10 sticky top-0 backdrop-blur-3xl z-10 px-8">
       <div className="flex justify-center items-center">
         <Link to="/">
-          <img src="/swiggy-1.svg" alt="swiggy-logo" className="w-7" />
+          <img
+            src="/logoramen.png"
+            alt="swiggy-logo"
+            className="sm:w-14  w-12"
+          />
         </Link>
       </div>
       <div className="flex justify-center items-center gap-10 relative">
@@ -57,7 +61,7 @@ const Navbar = () => {
               <span>
                 <IoIosSearch className="text-xl font-bold" />
               </span>
-              <span>Search</span>
+              <span className="hidden sm:flex">Search</span>
             </li>
           </Link>
           {loggedIn ? (
@@ -78,7 +82,7 @@ const Navbar = () => {
                 <span>
                   <CgProfile className="text-xl font-bold" />
                 </span>
-                <span>Sign In</span>
+                <span className="hidden sm:flex">Sign In</span>
               </li>
             </Link>
           )}
@@ -88,11 +92,11 @@ const Navbar = () => {
               <span>
                 <LuShoppingCart className="text-xl font-bold" />
               </span>
-              <span>Cart</span>
+              <span className="hidden sm:flex">Cart</span>
             </li>
           </Link>
         </ul>
-        <div className="absolute top-[18px] right-[45px] text-sm font-semibold">
+        <div className="absolute top-4 right-1 sm:top-[18px] sm:right-[45px] text-sm font-semibold">
           {cartItem?.length}
         </div>
       </div>
