@@ -33,7 +33,7 @@ const Search = () => {
         <IoIosSearch className="text-xl font-bold absolute right-[30%]" />
       </div>
       {!searchItem && (
-        <div className="text-xl p-4 font-semibold mt-10 animate-pulse w-[70%]">
+        <div className="text-xl p-4 font-semibold mt-10 animate-pulse w-[70%] flex items-center justify-center">
           Are you looking for tasty meals then search you fav 🤗 one
         </div>
       )}
