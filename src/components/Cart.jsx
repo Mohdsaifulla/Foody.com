@@ -98,7 +98,7 @@ const Cart = () => {
           </div>
           <div className="bg-gray-200 flex justify-between p-2 rounded">
             <h1 className="text-xl font-semibold">Proceed To Payment</h1>
-            <div className="flex flex-col">
+            <div className="flex flex-col justify-center items-center">
               <StripeCheckout
                 token={makePayment}
                 stripeKey={import.meta.env.VITE_STRIPE_KEY}
