@@ -49,6 +49,7 @@ const Navbar = () => {
           <img
             src="/logoramen.png"
             alt="swiggy-logo"
+            loading="lazy"
             className="sm:w-14  w-12"
           />
         </Link>

@@ -56,6 +56,7 @@ const Home = () => {
                   <img
                     src={`${CDN_URL}${item?.info?.cloudinaryImageId}`}
                     alt="Food"
+                    loading="lazy"
                     className="w-full h-40 rounded-2xl object-cover hover:scale-90 duration-300"
                   />
                 </Link>

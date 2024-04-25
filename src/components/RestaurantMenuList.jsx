@@ -7,8 +7,6 @@ import { BsStarFill } from "react-icons/bs";
 
 import AddToCartButton from "./AddToCartButton";
 const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
-
-
   const handleIndex = () => {
     setShowIndex();
   };
@@ -69,6 +67,7 @@ const RestaurantMenuList = ({ data, showIndex, setShowIndex }) => {
                   <img
                     src={`${CDN_URL}${item?.card?.info?.imageId}`}
                     alt="dish-img"
+                    loading="lazy"
                     className="w-44 h-32 rounded-xl"
                   />
                   <div className="absolute bottom-1 cursor-pointer flex justify-around gap-2">

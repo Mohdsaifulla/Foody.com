@@ -47,7 +47,8 @@ const Cart = () => {
                 <div className="flex gap-6 justify-between items-center overflow-hidden">
                   <img
                     src={`${CDN_URL}${item?.card?.info?.imageId}`}
-                    className="w-32 rounded-lg pb-2 overflow-hidden"
+                    className="w-32 rounded-lg pb-2  overflow-hidden"
+                    loading="lazy"
                   />
                   <p className=" font-semibold ">
                     {item?.card?.info?.name?.slice(0, 20)}...
